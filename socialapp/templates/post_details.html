@@ -1,9 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
+  <a href="{% url 'index' %}"><input type="button" value="Home" style="position:fixed; right:5px; color:blue"></a>
   <h2>Post details</h2>
   <div class="user-post">
     <p>{{ post.author }}</p>
     <p>{{ post.date_added }}</p>
     <p>{{ post.text }}</p>
+    <hr> 
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Post">
+    </form>
+    <hr>
+    <p><h2>Comments</h2></p>
+    <hr>
+    {% for comment in comments %}
+      <p>{{ comment.author }}</p>
+      <p>{{ comment.date_added }}</p>
+      <p>{{ comment.text }}</p>
+      <hr>
+    {% endfor %}
   </div>
 {% endblock %}
